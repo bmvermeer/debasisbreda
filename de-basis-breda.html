@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>De Basis Breda - Café</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f8f8;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .welcome-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .welcome-section h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+        
+        .welcome-section p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .info-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .info-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+        
+        .opening-hours {
+            list-style: none;
+        }
+        
+        .opening-hours li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .opening-hours li:last-child {
+            border-bottom: none;
+        }
+        
+        .day {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .hours {
+            color: #3498db;
+        }
+        
+        .contact-info {
+            margin-top: 1rem;
+        }
+        
+        .contact-info p {
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info span {
+            font-weight: bold;
+            margin-right: 0.5rem;
+            color: #2c3e50;
+        }
+        
+        .map-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .map-container h3 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        
+        .map-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        
+        .map-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .social-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .social-section h3 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .instagram-feed {
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        /* Instagram feed styles */
+        .elfsight-app-container {
+            margin: 0 auto;
+        }
+        
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        footer p {
+            margin: 0.5rem 0;
+        }
+        
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>De Basis Breda</h1>
+        <p class="tagline">Jouw gezellige café in het hart van Breda</p>
+    </header>
+
+    <div class="container">
+        <section class="welcome-section">
+            <h2>Welkom bij De Basis</h2>
+            <p>Een warm en gastvrij café waar iedereen zich thuis voelt. Of je nu komt voor een kopje koffie, een gezellige borrel of een goede maaltijd, bij De Basis ben je altijd welkom. Geniet van onze ontspannen sfeer en uitstekende service in het hart van Breda.</p>
+        </section>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>📍 Locatie & Contact</h3>
+                <div class="contact-info">
+                    <p><span>Adres:</span> Veemarktstraat 4, 4811 ZE Breda</p>
+                    <p><span>Stad:</span> Breda, Nederland</p>
+                    <p><span>Website:</span> <a href="https://www.facebook.com/debasisbreda" target="_blank">Facebook Pagina</a></p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3>🕐 Openingstijden</h3>
+                <!-- Google Business Profile Widget placeholder -->
+                <div id="google-business-hours">
+                    <p style="padding: 1rem; background: #e3f2fd; border-radius: 8px; color: #1976d2; margin-bottom: 1rem;">
+                        ℹ️ Voor de meest actuele openingstijden, bekijk onze <a href="https://www.google.com/maps/place/De+Basis/@51.588052,4.7743981,17z/data=!3m1!4b1!4m6!3m5!1s0x47c69f873ddea367:0x26839603f4d88c61" target="_blank" style="color: #1976d2; font-weight: bold;">Google Business pagina</a>
+                    </p>
+                    
+                    <!-- Tijdelijke statische openingstijden -->
+                    <ul class="opening-hours">
+                        <li>
+                            <span class="day">Maandag - Woensdag</span>
+                            <span class="hours">10:00 - 01:00</span>
+                        </li>
+                        <li>
+                            <span class="day">Donderdag</span>
+                            <span class="hours">10:00 - 02:00</span>
+                        </li>
+                        <li>
+                            <span class="day">Vrijdag - Zaterdag</span>
+                            <span class="hours">10:00 - 03:00</span>
+                        </li>
+                        <li>
+                            <span class="day">Zondag</span>
+                            <span class="hours">12:00 - 01:00</span>
+                        </li>
+                    </ul>
+                    
+                    <!-- Google Reviews Widget optie -->
+                    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #eee;">
+                        <p style="font-size: 0.9rem; color: #666; margin-bottom: 0.5rem;">⭐ Bekijk ook onze recensies op Google</p>
+                        <a href="https://www.google.com/maps/place/De+Basis/@51.588052,4.7743981,17z/data=!3m1!4b1!4m6!3m5!1s0x47c69f873ddea367:0x26839603f4d88c61" target="_blank" style="display: inline-block; padding: 0.5rem 1rem; background: #4285f4; color: white; text-decoration: none; border-radius: 5px; font-size: 0.9rem;">
+                            Bekijk op Google Maps
+                        </a>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: #666; text-align: center;">
+                    * Voor speciale evenementen en feestdagen kunnen de tijden afwijken
+                </p>
+            </div>
+        </div>
+
+        <div class="map-container">
+            <h3>📍 Vind Ons</h3>
+            <div class="map-wrapper">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2478.8109599475703!2d4.774398115796!3d51.588052079489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c69f873ddea367%3A0x26839603f4d88c61!2sDe%20Basis!5e0!3m2!1snl!2snl!4v1736515200000!5m2!1snl!2snl"
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+
+        <div class="social-section">
+            <h3>📱 Volg Ons</h3>
+            <div class="social-links">
+                <a href="https://www.instagram.com/debasisbreda/" target="_blank">
+                    📷 Instagram
+                </a>
+                <a href="https://www.facebook.com/debasisbreda" target="_blank">
+                    👍 Facebook
+                </a>
+            </div>
+            
+            <div class="instagram-feed">
+                <h3 style="margin-bottom: 2rem;">Laatste Updates van Instagram</h3>
+                <!-- Elfsight Instagram Feed Widget -->
+                <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+                <div class="elfsight-app-8c5e8f5a-5b5e-4f8e-9c5d-3f3f3f3f3f3f" data-elfsight-app-lazy></div>
+                
+                <!-- Alternative: Instagram SnapWidget (gratis versie) -->
+                <!-- Vervang de onderstaande code met je eigen SnapWidget embed code -->
+                <p style="padding: 2rem; background: #f0f0f0; border-radius: 10px; color: #666;">
+                    Voor een live Instagram feed, ga naar <a href="https://snapwidget.com" target="_blank">SnapWidget</a> of <a href="https://elfsight.com" target="_blank">Elfsight</a> om een gratis widget te maken met het Instagram account @debasisbreda en plaats de embed code hier.
+                </p>
+                
+                <!-- Tijdelijke Instagram link -->
+                <div style="margin-top: 2rem;">
+                    <a href="https://www.instagram.com/debasisbreda/" target="_blank" style="display: inline-block; padding: 1rem 2rem; background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); color: white; text-decoration: none; border-radius: 50px; font-weight: bold;">
+                        Bekijk ons op Instagram →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 De Basis Breda - Alle rechten voorbehouden</p>
+        <p>Veemarktstraat 4, 4811 ZE Breda</p>
+        <p>
+            <a href="https://www.instagram.com/debasisbreda/" target="_blank">Instagram</a> | 
+            <a href="https://www.facebook.com/debasisbreda" target="_blank">Facebook</a> | 
+            <a href="https://maps.app.goo.gl/4YvVAufnU4DLJoyE6" target="_blank">Google Maps</a>
+        </p>
+    </footer>
+
+    <!-- Google Maps Places Widget Alternative -->
+    <script>
+        // OPTIE VOOR LIVE GOOGLE OPENINGSTIJDEN:
+        // =====================================
+        // Om live openingstijden van Google te tonen, heb je een Google Maps API key nodig:
+        // 
+        // 1. Ga naar https://console.cloud.google.com/
+        // 2. Maak een nieuw project of selecteer een bestaand project
+        // 3. Activeer de "Places API" en "Maps JavaScript API"
+        // 4. Maak een API key aan
+        // 5. Voeg je API key toe aan onderstaande code:
+        
+        // Uncomment de volgende code en vervang YOUR_API_KEY met je eigen key:
+        /*
+        function initGooglePlaces() {
+            const placeId = 'ChIJZ6PevYefx0cRYYyI9ANjaDY'; // De Basis Place ID
+            const request = {
+                placeId: placeId,
+                fields: ['opening_hours', 'utc_offset_minutes']
+            };
+            
+            const service = new google.maps.places.PlacesService(document.createElement('div'));
+            service.getDetails(request, (place, status) => {
+                if (status === google.maps.places.PlacesServiceStatus.OK && place.opening_hours) {
+                    // Update de openingstijden sectie met live data
+                    updateOpeningHours(place.opening_hours);
+                }
+            });
+        }
+        
+        function updateOpeningHours(hours) {
+            // Implementeer hier de logica om de HTML te updaten met live tijden
+            console.log('Live openingstijden:', hours.weekday_text);
+        }
+        */
+        
+        // Voeg ook deze script tag toe aan de head sectie:
+        // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initGooglePlaces"></script>
+    </script>
+</body>
+</html>
