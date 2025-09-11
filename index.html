@@ -5,6 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>De Basis Breda - Café</title>
     <style>
+        :root {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --header-bg: linear-gradient(135deg, #1f3741 0%, #21626f 100%);
+            --card-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            --border-color: #404040;
+            --accent-color: #e7ab23;
+            --accent-hover: #357abd;
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f8f8f8;
+            --bg-secondary: white;
+            --text-primary: #333;
+            --text-secondary: #666;
+            --header-bg: linear-gradient(135deg, #1f3741 0%, #21626f 100%);
+            --card-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --border-color: #eee;
+            --accent-color: #e7ab23;
+            --accent-hover: #2980b9;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,16 +38,17 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background-color: #f8f8f8;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            background: var(--header-bg);
             color: white;
             text-align: center;
             padding: 3rem 1rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: var(--card-shadow);
         }
         
         h1 {
@@ -37,33 +62,43 @@
             opacity: 0.9;
         }
         
+        .address {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        .header-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .header-social a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .header-social a:hover {
+            transform: scale(1.1);
+        }
+
+        .header-social svg {
+            width: 16px;
+            height: 16px;
+            fill: white;
+        }
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
         }
         
-        .welcome-section {
-            background: white;
-            padding: 3rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        
-        .welcome-section h2 {
-            color: #2c3e50;
-            margin-bottom: 1rem;
-            font-size: 2rem;
-        }
-        
-        .welcome-section p {
-            font-size: 1.1rem;
-            color: #666;
-            max-width: 800px;
-            margin: 0 auto;
-        }
         
         .info-grid {
             display: grid;
@@ -72,18 +107,33 @@
             margin-bottom: 2rem;
         }
         
+        .hours-map-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            align-items: stretch;
+        }
+        
+        .hours-map-grid .info-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
         .info-card {
-            background: white;
+            background: var(--bg-secondary);
             padding: 2rem;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: var(--card-shadow);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
         
         .info-card h3 {
-            color: #2c3e50;
+            color: var(--text-primary);
             margin-bottom: 1.5rem;
             font-size: 1.5rem;
-            border-bottom: 2px solid #3498db;
+            border-bottom: 2px solid var(--accent-color);
             padding-bottom: 0.5rem;
         }
         
@@ -93,7 +143,7 @@
         
         .opening-hours li {
             padding: 0.5rem 0;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
         }
@@ -104,11 +154,11 @@
         
         .day {
             font-weight: bold;
-            color: #2c3e50;
+            color: var(--text-primary);
         }
         
         .hours {
-            color: #3498db;
+            color: var(--accent-color);
         }
         
         .contact-info {
@@ -124,23 +174,9 @@
         .contact-info span {
             font-weight: bold;
             margin-right: 0.5rem;
-            color: #2c3e50;
+            color: var(--text-primary);
         }
         
-        .map-container {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-        }
-        
-        .map-container h3 {
-            color: #2c3e50;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-            text-align: center;
-        }
         
         .map-wrapper {
             position: relative;
@@ -148,6 +184,7 @@
             height: 0;
             overflow: hidden;
             border-radius: 10px;
+            flex: 1;
         }
         
         .map-wrapper iframe {
@@ -160,15 +197,16 @@
         }
         
         .social-section {
-            background: white;
+            background: var(--bg-secondary);
             padding: 2rem;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: var(--card-shadow);
             margin-bottom: 2rem;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
         
         .social-section h3 {
-            color: #2c3e50;
+            color: var(--text-primary);
             margin-bottom: 1.5rem;
             font-size: 1.5rem;
             text-align: center;
@@ -184,13 +222,26 @@
         .social-links a {
             display: inline-flex;
             align-items: center;
+            gap: 0.5rem;
             padding: 0.8rem 1.5rem;
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-hover) 100%);
             color: white;
             text-decoration: none;
             border-radius: 50px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             font-weight: bold;
+        }
+        
+        .social-links a[href*="instagram"] {
+            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+        }
+        
+        .social-links a[href*="facebook"] {
+            background: linear-gradient(135deg, #1877f2 0%, #166fe5 100%);
+        }
+        
+        .social-links a[href*="twitch"] {
+            background: linear-gradient(135deg, #9146ff 0%, #7c3aed 100%);
         }
         
         .social-links a:hover {
@@ -203,17 +254,14 @@
             padding: 2rem 0;
         }
         
-        /* Instagram feed styles */
-        .elfsight-app-container {
-            margin: 0 auto;
-        }
         
         footer {
-            background: #2c3e50;
+            background: var(--header-bg);
             color: white;
             text-align: center;
             padding: 2rem;
             margin-top: 3rem;
+            transition: background 0.3s ease;
         }
         
         footer p {
@@ -221,12 +269,56 @@
         }
         
         footer a {
-            color: #3498db;
+            color: var(--accent-color);
             text-decoration: none;
         }
         
         footer a:hover {
             text-decoration: underline;
+        }
+
+        /* Dark Mode Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--accent-color);
+            border-radius: 50px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: var(--card-shadow);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .theme-toggle svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-primary);
+            transition: fill 0.3s ease;
+        }
+
+        [data-theme="light"] .theme-toggle svg {
+            fill: #ffd700;
+        }
+
+        /* Profile Banner */
+        .profile-banner {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 10px;
+        }
+
+        .profile-banner-container {
+            margin-bottom: 2rem;
+            padding: 0;
         }
         
         @media (max-width: 768px) {
@@ -235,6 +327,10 @@
             }
             
             .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hours-map-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -250,36 +346,43 @@
     </style>
 </head>
 <body>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
+        <svg viewBox="0 0 24 24" class="theme-icon">
+            <path d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/>
+        </svg>
+    </button>
+
     <header>
         <h1>De Basis Breda</h1>
-        <p class="tagline">Jouw gezellige café in het hart van Breda</p>
+        <p class="tagline">Veemarktstraat 4, 4811 ZE Breda</p>
+        <div class="header-social">
+            <a href="https://www.instagram.com/debasisbreda/" target="_blank" title="Instagram">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+            </a>
+            <a href="https://www.facebook.com/debasisbreda" target="_blank" title="Facebook">
+                <svg viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+            </a>
+            <a href="https://www.twitch.tv/basisbreda" target="_blank" title="Twitch">
+                <svg viewBox="0 0 24 24">
+                    <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/>
+                </svg>
+            </a>
+        </div>
     </header>
 
     <div class="container">
-        <section class="welcome-section">
-            <h2>Welkom bij De Basis</h2>
-            <p>Een warm en gastvrij café waar iedereen zich thuis voelt. Of je nu komt voor een kopje koffie, een gezellige borrel of een goede maaltijd, bij De Basis ben je altijd welkom. Geniet van onze ontspannen sfeer en uitstekende service in het hart van Breda.</p>
-        </section>
-
-        <div class="info-grid">
-            <div class="info-card">
-                <h3>📍 Locatie & Contact</h3>
-                <div class="contact-info">
-                    <p><span>Adres:</span> Veemarktstraat 4, 4811 ZE Breda</p>
-                    <p><span>Stad:</span> Breda, Nederland</p>
-                    <p><span>Website:</span> <a href="https://www.facebook.com/debasisbreda" target="_blank">Facebook Pagina</a></p>
-                </div>
-            </div>
-
+        <div class="info-card profile-banner-container">
+            <img src="profile_banner-480.58777aec.webp" alt="De Basis Breda Profile Banner" class="profile-banner">
+        </div>
+        <div class="hours-map-grid">
             <div class="info-card">
                 <h3>🕐 Openingstijden</h3>
-                <!-- Google Business Profile Widget placeholder -->
                 <div id="google-business-hours">
-                    <p style="padding: 1rem; background: #e3f2fd; border-radius: 8px; color: #1976d2; margin-bottom: 1rem;">
-                        ℹ️ Voor de meest actuele openingstijden, bekijk onze <a href="https://www.google.com/maps/place/De+Basis/@51.588052,4.7743981,17z/data=!3m1!4b1!4m6!3m5!1s0x47c69f873ddea367:0x26839603f4d88c61" target="_blank" style="color: #1976d2; font-weight: bold;">Google Business pagina</a>
-                    </p>
-                    
-                    <!-- Tijdelijke statische openingstijden -->
                     <ul class="opening-hours">
                         <li>
                             <span class="day">Maandag - Woensdag</span>
@@ -299,11 +402,10 @@
                         </li>
                     </ul>
                     
-                    <!-- Google Reviews Widget optie -->
                     <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #eee;">
-                        <p style="font-size: 0.9rem; color: #666; margin-bottom: 0.5rem;">⭐ Bekijk ook onze recensies op Google</p>
+                        <p style="font-size: 0.9rem; color: #666; margin-bottom: 0.5rem;">ℹ️ Voor de meest actuele openingstijden, bekijk onze Google Business pagina</p>
                         <a href="https://www.google.com/maps/place/De+Basis/@51.588052,4.7743981,17z/data=!3m1!4b1!4m6!3m5!1s0x47c69f873ddea367:0x26839603f4d88c61" target="_blank" style="display: inline-block; padding: 0.5rem 1rem; background: #4285f4; color: white; text-decoration: none; border-radius: 5px; font-size: 0.9rem;">
-                            Bekijk op Google Maps
+                            Google Business Profiel
                         </a>
                     </div>
                 </div>
@@ -312,101 +414,89 @@
                     * Voor speciale evenementen en feestdagen kunnen de tijden afwijken
                 </p>
             </div>
+
+            <div class="info-card">
+                <h3>📍 Vind Ons</h3>
+                <div class="map-wrapper">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2478.8109599475703!2d4.774398115796!3d51.588052079489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c69f873ddea367%3A0x26839603f4d88c61!2sDe%20Basis!5e0!3m2!1snl!2snl!4v1736515200000!5m2!1snl!2snl"
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
         </div>
 
-        <div class="map-container">
-            <h3>📍 Vind Ons</h3>
-            <div class="map-wrapper">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2478.8109599475703!2d4.774398115796!3d51.588052079489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c69f873ddea367%3A0x26839603f4d88c61!2sDe%20Basis!5e0!3m2!1snl!2snl!4v1736515200000!5m2!1snl!2snl"
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </div>
+        <!-- Instagram Feed Widget -->
+        <script src="https://elfsightcdn.com/platform.js" async></script>
+        <div class="info-card" style="margin-bottom: 2rem;">
+            <h3>📷 Instagram Feed</h3>
+            <div class="elfsight-app-35d074ce-ecd0-441b-89ab-54b54c8f2121" data-elfsight-app-lazy></div>
         </div>
 
         <div class="social-section">
             <h3>📱 Volg Ons</h3>
             <div class="social-links">
                 <a href="https://www.instagram.com/debasisbreda/" target="_blank">
-                    📷 Instagram
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                    Instagram
                 </a>
                 <a href="https://www.facebook.com/debasisbreda" target="_blank">
-                    👍 Facebook
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    Facebook
+                </a>
+                <a href="https://www.twitch.tv/basisbreda" target="_blank">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/>
+                    </svg>
+                    Twitch
                 </a>
             </div>
             
-            <div class="instagram-feed">
-                <h3 style="margin-bottom: 2rem;">Laatste Updates van Instagram</h3>
-                <!-- Elfsight Instagram Feed Widget -->
-                <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
-                <div class="elfsight-app-8c5e8f5a-5b5e-4f8e-9c5d-3f3f3f3f3f3f" data-elfsight-app-lazy></div>
-                
-                <!-- Alternative: Instagram SnapWidget (gratis versie) -->
-                <!-- Vervang de onderstaande code met je eigen SnapWidget embed code -->
-                <p style="padding: 2rem; background: #f0f0f0; border-radius: 10px; color: #666;">
-                    Voor een live Instagram feed, ga naar <a href="https://snapwidget.com" target="_blank">SnapWidget</a> of <a href="https://elfsight.com" target="_blank">Elfsight</a> om een gratis widget te maken met het Instagram account @debasisbreda en plaats de embed code hier.
-                </p>
-                
-                <!-- Tijdelijke Instagram link -->
-                <div style="margin-top: 2rem;">
-                    <a href="https://www.instagram.com/debasisbreda/" target="_blank" style="display: inline-block; padding: 1rem 2rem; background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); color: white; text-decoration: none; border-radius: 50px; font-weight: bold;">
-                        Bekijk ons op Instagram →
-                    </a>
-                </div>
-            </div>
         </div>
     </div>
 
     <footer>
         <p>&copy; 2024 De Basis Breda - Alle rechten voorbehouden</p>
         <p>Veemarktstraat 4, 4811 ZE Breda</p>
+        <p>Email: <a href="mailto:cafe@basisbreda.nl">cafe@basisbreda.nl</a></p>
         <p>
             <a href="https://www.instagram.com/debasisbreda/" target="_blank">Instagram</a> | 
             <a href="https://www.facebook.com/debasisbreda" target="_blank">Facebook</a> | 
+            <a href="https://www.twitch.tv/basisbreda" target="_blank">Twitch</a> | 
             <a href="https://maps.app.goo.gl/4YvVAufnU4DLJoyE6" target="_blank">Google Maps</a>
         </p>
     </footer>
 
-    <!-- Google Maps Places Widget Alternative -->
     <script>
-        // OPTIE VOOR LIVE GOOGLE OPENINGSTIJDEN:
-        // =====================================
-        // Om live openingstijden van Google te tonen, heb je een Google Maps API key nodig:
-        // 
-        // 1. Ga naar https://console.cloud.google.com/
-        // 2. Maak een nieuw project of selecteer een bestaand project
-        // 3. Activeer de "Places API" en "Maps JavaScript API"
-        // 4. Maak een API key aan
-        // 5. Voeg je API key toe aan onderstaande code:
-        
-        // Uncomment de volgende code en vervang YOUR_API_KEY met je eigen key:
-        /*
-        function initGooglePlaces() {
-            const placeId = 'ChIJZ6PevYefx0cRYYyI9ANjaDY'; // De Basis Place ID
-            const request = {
-                placeId: placeId,
-                fields: ['opening_hours', 'utc_offset_minutes']
-            };
+        // Theme Toggle Functionality (Dark mode is default)
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
             
-            const service = new google.maps.places.PlacesService(document.createElement('div'));
-            service.getDetails(request, (place, status) => {
-                if (status === google.maps.places.PlacesServiceStatus.OK && place.opening_hours) {
-                    // Update de openingstijden sectie met live data
-                    updateOpeningHours(place.opening_hours);
-                }
-            });
+            if (currentTheme === 'light') {
+                body.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }
         }
-        
-        function updateOpeningHours(hours) {
-            // Implementeer hier de logica om de HTML te updaten met live tijden
-            console.log('Live openingstijden:', hours.weekday_text);
-        }
-        */
-        
-        // Voeg ook deze script tag toe aan de head sectie:
-        // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initGooglePlaces"></script>
+
+        // Load saved theme on page load (dark mode is default)
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.setAttribute('data-theme', 'light');
+            }
+            // If no saved theme, dark mode is default (no data-theme attribute)
+        });
     </script>
+
 </body>
 </html>
